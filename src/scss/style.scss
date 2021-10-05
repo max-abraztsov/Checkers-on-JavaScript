@@ -9,11 +9,18 @@ body{
 }
 
 
+// .deck{
+//     display:flex;
+//     flex-wrap:wrap;
+//     max-width:600px;
+// }
+
 .deck{
-    display:flex;
-    flex-wrap:wrap;
+    display:grid;
+    grid-template: repeat(8, 75px) / repeat(8, 75px);
     max-width:600px;
 }
+
 .rectangle:nth-child(even){
     background-color: rgb(43, 42, 42);
     display:flex;
