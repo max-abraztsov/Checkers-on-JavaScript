@@ -2,9 +2,11 @@ import '../scss/zero.scss';
 import '../scss/style.scss';
 import '../css/style.css';
 
-const allRectangles = document.querySelectorAll('.rectangle');
+
+const deck = document.querySelector('.deck');
+const allRectangles = deck.querySelectorAll('.rectangle');
 let blackRectangles = [];
-let allCheckers;
+// let allCheckers;
 
 for (let i = 0; i < allRectangles.length; i++){
     if( i % 2 != 0 && !allRectangles[i].classList.contains('none')){
@@ -16,6 +18,8 @@ console.log(blackRectangles);
 blackRectangles.forEach( item => {
     item.addEventListener('click', (e) => {
         console.log(e);
+        console.log(e.target.offsetLeft);
+        console.log(e.target.offsetTop);
     });
 });
 
@@ -49,10 +53,12 @@ class Checker {
         });
 
         function go(e){
-            if(!e.target.hasChildNodes() && e.target.classList.contains('rectangle')){
+            if(!e.target.hasChildNodes() && e.target.classList.contains('rectangle')){    
                 e.target.append(checkerOne);
+                
                 blackRectangles.forEach( item => {
                     item.style.border = '';
+                    item.removeEventListener('click', go);
                 });
             } 
         }
@@ -63,16 +69,23 @@ class Checker {
     }
 }
 
-const checker1 = new Checker(55, 55, 'white');
-const checker2 = new Checker(55, 55, 'white');
+function spawnTeam(begin, color){
+    for (let i = 0; i < 12; i++){
+        const checker = new Checker(55, 55, color);
+        checker.spawn(begin + i);
+    }
+}
 
-checker1.spawn(26);
-checker2.spawn(27);
+spawnTeam(20, 'white');
+spawnTeam(0, 'black');
 
-console.log(allCheckers);
-allCheckers = document.querySelectorAll('.checker');
-// allCheckers.forEach( (item)=> {
-//     item.addEventListener('click', (e) => {
-//         e.target.go();
-//     });
-// });
+
+
+// console.log(allCheckers);
+// allCheckers = document.querySelectorAll('.checker');
+
+// const checker1 = new Checker(55, 55, 'white');
+// const checker2 = new Checker(55, 55, 'white');
+
+// checker1.spawn(26);
+// checker2.spawn(27);

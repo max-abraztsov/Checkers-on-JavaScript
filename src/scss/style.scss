@@ -19,6 +19,7 @@ body{
     display:grid;
     grid-template: repeat(8, 75px) / repeat(8, 75px);
     max-width:600px;
+    position:relative;
 }
 
 .rectangle:nth-child(even){
@@ -32,8 +33,14 @@ body{
     width:75px;
     height:75px;
     border:1px solid rgb(43, 42, 42);
+    
 }
 
 .rectangle.none{
     display:none;
+}
+
+.checker{
+    
+    transition:all .4s ease 0;
 }
