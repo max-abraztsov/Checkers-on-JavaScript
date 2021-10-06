@@ -6,6 +6,7 @@ import '../css/style.css';
 const deck = document.querySelector('.deck');
 const allRectangles = deck.querySelectorAll('.rectangle');
 let blackRectangles = [];
+let p = 0;
 // let allCheckers;
 
 for (let i = 0; i < allRectangles.length; i++){
@@ -17,19 +18,20 @@ console.log(blackRectangles);
 
 blackRectangles.forEach( item => {
     item.addEventListener('click', (e) => {
-        console.log(e);
-        console.log(e.target.offsetLeft);
-        console.log(e.target.offsetTop);
+        // console.log(e);
+        // console.log(e.target.offsetLeft);
+        // console.log(e.target.offsetTop);
     });
 });
 
 
 
 class Checker {
-    constructor(height, width, color){
+    constructor(height, width, color, index){
         this.height = height;
         this.width = width;
         this.color = color;
+        this.index = index;
     }
 
     spawn (rec) {
@@ -46,6 +48,10 @@ class Checker {
         blackRectangles[rec].append(checkerOne);
 
         checkerOne.addEventListener('click', (e) => {
+            if(e.target == checkerOne){
+                e.target.classList.add('active');
+            }
+            // console.log(e.target);
             blackRectangles.forEach( item => {
                 item.style.border = '2px solid blue';
                 item.addEventListener('click', go);
@@ -53,19 +59,28 @@ class Checker {
         });
 
         function go(e){
-            if(!e.target.hasChildNodes() && e.target.classList.contains('rectangle')){    
-                e.target.append(checkerOne);
-                
-                blackRectangles.forEach( item => {
-                    item.style.border = '';
-                    item.removeEventListener('click', go);
-                });
-            } 
+            p++;
+            if (p == 2){
+                if(!e.target.hasChildNodes() && e.target.classList.contains('rectangle')){    
+                    e.target.append(checkerOne);
+                    nullFunc();
+                }
+                if(e.target.hasChildNodes()){
+                    nullFunc();
+                }
+                p = 0;
+            }
+            if(p == 0){
+                nullFunc();
+            }
         }
-    }
 
-    go () {
-    
+        function nullFunc(){
+            blackRectangles.forEach( item => {
+                item.style.border = '';
+                item.removeEventListener('click', go);
+            });
+        }
     }
 }
 
@@ -89,3 +104,5 @@ spawnTeam(0, 'black');
 
 // checker1.spawn(26);
 // checker2.spawn(27);
+
+

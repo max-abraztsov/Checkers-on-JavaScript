@@ -8,19 +8,19 @@ body{
     justify-content:center;
 }
 
-
-// .deck{
-//     display:flex;
-//     flex-wrap:wrap;
-//     max-width:600px;
-// }
-
 .deck{
-    display:grid;
-    grid-template: repeat(8, 75px) / repeat(8, 75px);
+    display:flex;
+    flex-wrap:wrap;
     max-width:600px;
     position:relative;
 }
+
+// .deck{
+//     display:grid;
+//     grid-template: repeat(8, 75px) / repeat(8, 75px);
+//     max-width:600px;
+//     position:relative;
+// }
 
 .rectangle:nth-child(even){
     background-color: rgb(43, 42, 42);
@@ -41,6 +41,6 @@ body{
 }
 
 .checker{
-    
     transition:all .4s ease 0;
 }
+
